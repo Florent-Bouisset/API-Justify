@@ -12,6 +12,7 @@
     "@types/http-errors": "^1.8.0",
     "@types/mongodb": "^3.5.31",
     "@types/morgan": "^1.9.1",
+    "@types/uuid": "^8.3.0",
     "cookie-parser": "~1.4.4",
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",

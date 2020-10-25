@@ -1,12 +1,11 @@
-import { MongoClient} from "mongodb"
+import { Db, MongoClient} from "mongodb"
 
 class Connection {
-    db = null;
+    db?: Db ;
     url= 'mongodb://localhost/'
     dbName =  'api';
     options = {
             bufferMaxEntries:   0,
-            reconnectTries:     5000,
             useNewUrlParser:    true,
             useUnifiedTopology: true,
         }

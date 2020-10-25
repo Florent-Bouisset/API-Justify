@@ -1,22 +1,22 @@
-import Connection from "./db"
+import Connection from "../database/db"
 import { v4 as uuidv4 } from 'uuid';
 import user from './userInterface'
 
-class ApiUser {
+class UserUtils {
 
     /**
      * Create the user and insert it in the database
      * @param email 
      * @returns the user object
      */
-    public static async createUser(userEmail: string):Promise<string> { 
+    public static async createUser(userEmail: string):Promise<user> { 
         const connection = new Connection()
         const db = await connection.connectToMongo()
 
         const newUser:user = {
             email : userEmail,
-            token : ApiUser.generateToken(),
-            todayDate : new Date(),
+            token : UserUtils.generateToken(),
+            dateOfLastRequest : new Date(),
             wordsUsedToday : 0
         }
         db.collection('users').insertOne(newUser)
@@ -39,7 +39,7 @@ class ApiUser {
      * @returns the user object, or null if not found
      */
 
-    public static async getUser(email: string):Promise<string> { 
+    public static async getUser(email: string):Promise<user> { 
         const connection = new Connection()
         const db = await connection.connectToMongo()
         const result = await db.collection('users').findOne({'email': email})
@@ -62,13 +62,13 @@ class ApiUser {
 }
 
 
-export default ApiUser
+export default UserUtils
 
 
-// ApiUser.createUser("ciyciy@ema.fr")
-// ApiUser.userExist('toto@gmail.com')
+// UserUtils.createUser("ciyciy@ema.fr")
+// UserUtils.userExist('toto@gmail.com')
 //     .then(res => console.log(res, 'toto'))
-// ApiUser.userExist('toto56@gmail.com')
+// UserUtils.userExist('toto56@gmail.com')
 //     .then(res => console.log(res, 'toto56'))
 
-// ApiUser.getUser('toto555@gmail.com')
+// UserUtils.getUser('toto555@gmail.com')

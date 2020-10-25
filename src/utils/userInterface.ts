@@ -1,7 +1,7 @@
 interface user {
     email: string;
     token: string;
-    todayDate: Date;
+    dateOfLastRequest: Date;
     wordsUsedToday: number;
 }
 
