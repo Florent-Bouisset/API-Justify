@@ -11,7 +11,7 @@ class Authentication{
         const connection = new Connection()
         const db = await connection.connectToMongo()
         const user = await db.collection('users').findOne({'token':token})
-        return (user ==! null)
+        return !(user === null)
     }
 
 
