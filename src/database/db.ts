@@ -3,7 +3,7 @@ import { Db, MongoClient} from "mongodb"
 class Connection {
     db?: Db ;
     url= 'mongodb://localhost/'
-    dbName =  'api';
+    dbName =  process.env.DB_NAME || 'tictatrip';
     options = {
             bufferMaxEntries:   0,
             useNewUrlParser:    true,
@@ -14,7 +14,7 @@ class Connection {
     public async connectToMongo():Promise<any> {
         if (this.db) return this.db
         const client = await MongoClient.connect(this.url, this.options)
-        this.db = client.db('api');
+        this.db = client.db(this.dbName);
 
         return this.db
     }

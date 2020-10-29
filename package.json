@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "build": "rm -rf dist/ ; tsc",
-    "start": "node ./dist/bin/www",
+    "start": "NODE_ENV=development node ./dist/bin/www",
+    "prod": "NODE_ENV=production node ./dist/bin/www",
     "lint": "eslint . --ext .ts",
     "test": "jest --detectOpenHandles"
   },
-  "jest":{
+  "jest": {
     "clearMocks": true,
     "coverageDirectory": "coverage",
     "coverageProvider": "v8",
@@ -28,6 +29,7 @@
     "cookie-parser": "~1.4.4",
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",

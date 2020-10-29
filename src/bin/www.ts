@@ -2,14 +2,16 @@
 import app from "../app"
 import debug from "debug"
 import http from "http"
+import dotenv from "dotenv"
 
-//const debug = require('debug')('apiexpress:server');
-
-
+dotenv.config({
+  path:('config/' + process.env.NODE_ENV + '.env')
+})
 // Get port from environment and store in Express.
 
+console.log('NODE ENV: ', process.env.NODE_ENV)
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.API_PORT || '3000');
 app.set('port', port);
 
 // Create HTTP server.
