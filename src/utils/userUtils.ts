@@ -19,8 +19,9 @@ class UserUtils {
             dateOfLastRequest : new Date(),
             wordsUsedToday : 0
         }
-        db.collection('users').insertOne(newUser)
-        console.log("user created");
+        const copy = Object.assign({}, newUser);
+        db.collection('users').insertOne(copy)
+
         return newUser
     }
 
@@ -43,7 +44,9 @@ class UserUtils {
         const connection = new Connection()
         const db = await connection.connectToMongo()
         const result = await db.collection('users').findOne({'email': email})
-        console.log(result)
+        if(result._id){
+            delete result._id
+        }
         return result
     }
 
@@ -64,11 +67,3 @@ class UserUtils {
 
 export default UserUtils
 
-
-// UserUtils.createUser("ciyciy@ema.fr")
-// UserUtils.userExist('toto@gmail.com')
-//     .then(res => console.log(res, 'toto'))
-// UserUtils.userExist('toto56@gmail.com')
-//     .then(res => console.log(res, 'toto56'))
-
-// UserUtils.getUser('toto555@gmail.com')

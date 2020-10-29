@@ -6,7 +6,7 @@ import path from "path"
 import cookieParser from "cookie-parser"
 import logger from "morgan"
 
-import usersRouter from "./routes/users"
+import tokenRouter from "./routes/token"
 import justifyRouter from "./routes/justify"
 
 
@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', usersRouter);
-app.use('/justify', justifyRouter);
+app.use('/api/token', tokenRouter);
+app.use('/api/justify', justifyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req:Request, res:Response, next:NextFunction) {

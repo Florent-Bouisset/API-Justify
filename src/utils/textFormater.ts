@@ -1,5 +1,5 @@
 
-const maxWidth = 20 
+const maxWidth = 80 
 
 
 class TextFormater {
@@ -29,7 +29,8 @@ class TextFormater {
             line.push(word)
 
         }
-        console.log(justifiedText)
+        // Add last line
+        justifiedText += line.join(' ')
         return justifiedText
     }
 

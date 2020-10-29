@@ -23,6 +23,9 @@ class Authentication{
         const connection = new Connection()
         const db = await connection.connectToMongo()
         const userFound = await db.collection('users').findOne({'token':token})
+        if(userFound){
+            delete userFound._id
+        }
         return userFound
     }
 }

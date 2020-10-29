@@ -1,11 +1,13 @@
 import Connection from "../database/db"
+import UserUtils from '../utils/userUtils'
 import user from './userInterface'
 
 const maxWordsPerDay = 80000; 
 
 class RequestLimiter{
     public static async remainingWords(user: user):Promise<number>{
-        const userUpToDate = await RequestLimiter.updateRemainingWords(user)
+        const userInDb = await UserUtils.getUser(user.email)
+        const userUpToDate = await RequestLimiter.updateRemainingWords(userInDb)
         return maxWordsPerDay - userUpToDate.wordsUsedToday
     
     }
@@ -29,6 +31,13 @@ class RequestLimiter{
         return user
     }
 
+    public static async addWordsUsedToday(wordsAmount: number, user:user):Promise<void> {
+        const connect = new Connection()
+        const db = await connect.connectToMongo()
+        const userUpdated = Object.assign({}, user);
+        userUpdated.wordsUsedToday += wordsAmount
+        await db.collection('users').update(user, userUpdated)
+    }
 }
 
 export default RequestLimiter
