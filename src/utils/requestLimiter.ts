@@ -25,7 +25,7 @@ class RequestLimiter{
             const userUpdated = user
             userUpdated.dateOfLastRequest = new Date()
             userUpdated.wordsUsedToday = 0
-            await db.updateOne(user, userUpdated)
+            await db.collection('users').update(user, userUpdated)
             return userUpdated
         }
         return user
