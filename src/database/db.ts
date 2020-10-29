@@ -3,7 +3,7 @@ import { Db, MongoClient} from "mongodb"
 class Connection {
     db?: Db ;
     url= 'mongodb://localhost/'
-    dbName =  process.env.DB_NAME || 'tictatrip';
+    dbName =  process.env.DB_NAME || 'tictactrip';
     options = {
             bufferMaxEntries:   0,
             useNewUrlParser:    true,
